@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        [v-cloak]{
+            display: none;
+        }
+        a{
+            text-decoration: none;
+            color: pink;
+        }
+        #app span{
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <ul>
+        <li v-for="(item,idx) in items">
+            {{item.name}}
+            <a href="javascript:void(0)" @click="showAlert(idx)">点击弹窗</a>
+            <span @click="changeUsername(idx)">修改昵称</span>
+            <span>我今年 {{obj.age}} 岁啦~</span>
+        </li>
+    </ul>
+    <h1>点击次数:{{count}}</h1>
+    <button @click="growUp">大一岁</button>
+    <button @click="changeSex">改变性别</button>
+    <div id="template">
+        <!--v-for on a <template>  模板渲染v-for-->
+        <template v-for="item in lists">
+            <h1>{{item["title"]}}</h1>
+            <span>{{item["id"]}}</span>
+            <span>{{item["price1"]}}</span>
+            <span>{{item["count"]}}</span>
+            <button style="margin-left: 20px;" @click="addOneMore">再加一份</button>
+        </template>
+    </div>
+    <ul>
+        <li v-for="(item,index) in arrLists" style="margin-top: 10px;">
+            {{item}} + {{index}}
+            <button @click="changeArr">更改姓名</button>
+        </li>
+    </ul>
+    <div id="test">
+        <template v-for="(item,index) in arr">
+            <h1>
+                <span>{{item}}</span>
+            </h1>
+        </template>
+    </div>
+    <button @click="addRow">添加一行</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            items:[
+                {name:"张靖"},
+                {name:"阿彪"},
+                {name:"钟平"},
+                {name:"吉哥"},
+                {name:"杜梦莹"}
+            ],
+            count:0,
+            obj:{
+                age:23,
+                sex:"man"
+            },
+            lists:[
+                {
+                    id: 336,
+                    title: '智利三文鱼扒500g酸甜口味爆炒',
+                    count: 1,
+                    price1: 106,
+                },
+                {
+                    id: 337,
+                    title: '西班牙三文鱼扒500g酸甜口味爆炒',
+                    count: 2,
+                    price1: 225,
+                }
+            ],
+            arrLists:["assassin","tom","davin","sdhaushd"],
+            arr:[1,2,3,4,5,6]
+        },
+        methods:{
+            showAlert(idx){
+                alert("This is " + this["items"][idx]["name"]);
+                this.count += 1;
+            },
+            changeUsername(idx){
+                this["items"][idx]["name"] = "我改名字啦~";
+            },
+            growUp(){
+                this["obj"]["age"] += 1;
+            },
+            changeSex(){
+                this["obj"]["sex"] = "woman";
+            },
+            addOneMore(){
+                this.lists[0]["count"] = 2;
+            },
+            /*
+            * Vue不能检测到以下变动的数组
+            * 1.当利用索引直接设置一个值：vm.items[indexOfItem] = newValue;
+            * 2.当修改数组的长度时：vm.items.length = newLength;
+            */
+            changeArr(){
+//                this.arrLists[0] = "zhangjing"; //不能直接这样赋值
+//                this.arrLists.splice(0,1,"zhangjing");  //方法1：example1.items.splice(indexOfItem,1,newValue);
+                this.$set(this.arrLists,0,"zhangjing");   //方法2：Vue.set(example1.item,indexOfItem,newValue);
+            },
+            addRow(){
+                this.arr.push(this.arr[this.arr.length-1]+1);
+            }
+        },
+        watch:{
+            items:{
+                handler:function(){
+                    alert("监听变化~");
+                },
+                deep:true
+            },
+            //监听对象中的单个属性，可以用 "obj[key]" 这种形式
+            "obj.age":function(){
+                alert("我打了了")
+            },
+            lists:{
+                handler:function(){
+                    alert("我又订了一份菜单~");
+                },
+                deep:true
+            }
+        }
+    })
+</script>
+</body>
+</html>
