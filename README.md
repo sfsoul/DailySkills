@@ -8,3 +8,5 @@
 **Vue中的代理Proxy**   https://www.w3cplus.com/vue/vue-proxying.html
 
 **Vue脱坑记 - 查漏补缺**   https://juejin.im/post/59fa9257f265da43062a1b0e
+
+**如何提高代码的可读性? - 读《编写可读代码的艺术》**  https://juejin.im/post/5a0921c05188252ae93a7014#heading-0
