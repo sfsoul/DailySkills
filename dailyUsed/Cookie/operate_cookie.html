@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作Cookie</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    (function(){
+        var cookieObj = {
+            //设置Cookie
+            setCookie:function(name,value){
+                var days = 30;
+                var exp = new Date();
+                exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
+                document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+            },
+            //获取Cookie
+            getCookie:function(name){
+                if(!name) return "";
+                var reg = new RegExp('(^|)' + name + '=([^;]*)(;|$)');
+                var arr = document.cookie.match(reg);
+
+                if(arr) {
+                    return decodeURI(arr[2])
+                }
+                return '';
+            },
+            //删除Cookie
+            delCookie:function(name){
+                var exp = new Date();
+                var cval=this.getCookie(name);
+                exp.setTime(exp.getTime() - 1);
+                if(cval!=null) {
+                    document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+                }
+            }
+        }
+        window.cookieObj = cookieObj;
+    })()
+</script>
+</body>
+</html>
