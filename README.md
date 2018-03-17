@@ -1,19 +1,33 @@
 # DailySkills
 **主要记录个人平时开发工作中和阅读到的好的文章。**
 
-**目前看到的最好的关于Vue分析的文章**     https://juejin.im/post/59f2845e6fb9a0451a759e85
+### 目前看到的最好的关于Vue分析的文章  
 
-**Vue实例和生命周期**   https://www.w3cplus.com/vue/vue-instances-and-life-cycles.html
+原文链接：  https://juejin.im/post/59f2845e6fb9a0451a759e85
 
-**Vue中的代理Proxy**   https://www.w3cplus.com/vue/vue-proxying.html
+### Vue实例和生命周期 
 
-**Vue脱坑记 - 查漏补缺**   https://juejin.im/post/59fa9257f265da43062a1b0e
+ 原文链接： https://www.w3cplus.com/vue/vue-instances-and-life-cycles.html
 
-**如何提高代码的可读性? - 读《编写可读代码的艺术》**  https://juejin.im/post/5a0921c05188252ae93a7014#heading-0
+### Vue中的代理Proxy
 
-**Vue.js风格指南**  https://cn.vuejs.org/v2/style-guide/
+原文链接： https://www.w3cplus.com/vue/vue-proxying.html
 
-**撸js基础之函数** http://www.ferecord.com/lujs-function.html
+### Vue脱坑记 - 查漏补缺
+
+ 原文链接： https://juejin.im/post/59fa9257f265da43062a1b0e
+
+### 如何提高代码的可读性? - 读《编写可读代码的艺术》
+
+原文链接：  https://juejin.im/post/5a0921c05188252ae93a7014#heading-0
+
+### Vue.js风格指南
+
+原文链接： https://cn.vuejs.org/v2/style-guide/
+
+### 撸js基础之函数
+
+原文链接：http://www.ferecord.com/lujs-function.html
 
 ### 编写小而美的函数艺术
 原文链接：https://zhuanlan.zhihu.com/p/33327427
@@ -39,9 +53,10 @@
 原文链接：https://www.cnblogs.com/iovec/p/5312464.html
 ### 聊一聊Cookie
 原文链接：https://juejin.im/entry/56de3412c4c97100559ce83c
+
+
+
 ###Cookie与Session的区别
 原文链接：https://mp.weixin.qq.com/s?__biz=MzA4MjA0MTc4NQ==&mid=504090000&idx=3&sn=f57d4f194c902daadd80296d5b8ed001#rd
 ### 认识HTTP----Cookie和Session篇
 原文链接：https://zhuanlan.zhihu.com/p/27669892?utm_source=com.daimajia.gold&utm_medium=social
-### Web登录与cookie
-原文链接：https://zhuanlan.zhihu.com/p/23680141
