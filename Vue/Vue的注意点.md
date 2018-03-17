@@ -155,3 +155,67 @@ var vm = new Vue({
 })
 ````
 
+### 王者情侣
+
+```
+邀请TA参加大作战(报名)：6.报名接口(不支持微信)sign_up
+寻找命定之人:5.拉取报名信息接口get_attend_info
+查看更多(亲密度排行榜)：7.拉取排行榜信息get_attend_rank(好像缺少 开黑胜率与亲密度两个字段)
+点击领取：8.绑定接口bind_captain
+
+//排行榜
+		rank_list.forEach(function(item,idx){
+									    console.log(item);
+									    var member_list = item.member_list;
+									    member_list.forEach(function(list){
+									        var uin = list.uin;
+									        console.log(uin);
+									        arr.push(uin);
+										})
+									    zHttp.send({actid:234606,uins:arr},function(json){
+									        console.log(json);
+									        if(json.ret == 0 && json.data.op){
+									            var friendArr = json.data.op.friend;
+									            vm.rankList.push({"hostFaceUrl":friendArr[arr[0]]["face"],"guestFaceUrl":friendArr[arr[1]]["face"],"score":item.score,"isCp":false,"hostName":item.nick_name,"rank":item.rank})
+                                                vm.rankList[0]["isCp"] = true;
+                                            }
+										})
+									})
+									
+//发送结构化消息
+    inviteFriends:function(){
+					    zHttp.syrequest({
+                            actid:238893,
+//                              targetid:vm.inviteFriendsUin.join(","),
+                            targetid:this.inviteUin,
+                            targettype: 1,
+                            replace: 'invite_uin|' + me.uin
+						},function(json,actid,fn){
+					        console.log(json);
+					        if(json.ret == 0){
+					            vm.teamInfo = "邀请中";
+//					            qv.zero.cache.add(info,"邀请中",1000*24*60*60*30);
+							}
+					        zHttp.showResponse(json,actid,fn);
+						})
+					}
+					
+//分享方法
+ var args_self = {
+    title: "和好友一起领王者礼包！",
+    desc: "皮肤，英雄，钻石这里应有尽有！",
+    image_url: window.location.protocol+"//imgcache.gtimg.cn/vipstyle/game/act/owx/201709/kg_relation/img/share.png",
+    share_url: "https://youxi.vip.qq.com/m/act/201709/kg_relation/index.html?_wv=1",
+    share_type : 0,
+    back : true,
+    sourceName:"QQ手游",
+    puin:"2747277822"
+ };
+ //右上角分享
+ mqq.ui.setOnShareHandler(function(type){
+ 		mqq.ui.shareMessage(args_self);
+ });
+ 
+ 帅在灵魂:2393275725
+```
+

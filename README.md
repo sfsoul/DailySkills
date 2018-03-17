@@ -12,3 +12,5 @@
 **如何提高代码的可读性? - 读《编写可读代码的艺术》**  https://juejin.im/post/5a0921c05188252ae93a7014#heading-0
 
 **Vue.js风格指南**  https://cn.vuejs.org/v2/style-guide/
+
+**撸js基础之函数** http://www.ferecord.com/lujs-function.html
