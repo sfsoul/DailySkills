@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function test(data){
+        console.log(data);
+    }
+    var img = document.createElement("img");
+    img.src = "http://imgcache.gtimg.cn/vipstyle/game/act/zj/266241/img/download.png";
+    img.onload = function(){
+        document.body.appendChild(img);
+    }
+</script>
+<script src="../../lib/test.js"></script>
+</body>
+</html>

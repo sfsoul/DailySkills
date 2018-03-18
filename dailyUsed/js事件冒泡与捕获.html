@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js事件冒泡与捕获</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width: 200px;
+            height:200px;
+            text-align: center;
+            line-height:200px;
+            background: pink;
+            border:1px solid #ccc;
+            margin:20px auto;
+        }
+        #box #content{
+            width: 30px;
+            height:30px;
+            border:1px solid yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <button id="content">测试</button>
+</div>
+
+<ul id="colorList">
+    <li>red</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>green</li>
+    <li>black</li>
+    <li>white</li>
+</ul>
+<script>
+    var content = document.getElementById("content");
+    var box = document.getElementById("box");
+    var colorList = document.getElementById("colorList");
+    var liDom = colorList.getElementsByTagName("li");
+    var newLiDom = document.createElement("li");
+    newLiDom.innerText = "pink";
+    colorList.appendChild(newLiDom);
+    Array.prototype.slice.apply(liDom).forEach(function(item,idx){
+        item.setAttribute("data-index",idx);
+    })
+
+    box.addEventListener("click",function(e){
+        console.log("box 冒泡事件");
+    },false);
+    content.addEventListener("click",function(e){
+        console.log("content 捕获事件");
+    },true);
+    box.addEventListener("click",function(e){
+        console.log("box 捕获事件");
+    },true);
+    content.addEventListener("click",function(e){
+        console.log("content 冒泡事件");
+    },false);
+
+//    for(var i=0;i<liDom.length;i++){
+//        (function (j){
+//            liDom[j].addEventListener("click",function(e){
+//                console.log(j+"==="+e.target.innerHTML);
+//            },false)
+//        })(i);
+//    }
+
+    //事件代理--将方法绑定在目标元素的父元素上面(利用的是冒泡机制)
+    /*好处：1、将多个事件处理函数简化为一个；
+           2、对于不同的元素有不同的处理方法；
+           若上面列表再添加其它元素(如a或者span)，不必再一次循环给每一个元素绑定事件，直接修改事件代理的事件处理函数即可。
+     */
+    colorList.addEventListener("click",function(e){
+        var idx = e.target.dataset.index;
+        console.log(e.target);
+//        var idx = getChildrenIndex(e.target);
+        if(e.target.tagName === "LI"){
+            alert(idx+"==="+e.target.innerHTML);
+        }
+    },false);
+
+    //获取节点或者元素对象的索引号
+    function getChildrenIndex(ele){
+        //IE is simplest and fastest
+        if(ele.sourceIndex){
+            return ele.sourceIndex - ele.parentNode.sourceIndex - 1;
+        }
+        //other browsers
+        var i=0;
+        //若有同级之前的相邻的同类型的元素则索引值加1
+        while(ele = ele.previousElementSibling){
+            console.log(ele);
+            i++;
+        }
+        return i;
+    }
+</script>
+</body>
+</html>

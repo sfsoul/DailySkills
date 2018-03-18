@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<script>
+    var script = document.createElement("script");
+    var head = document.getElementsByTagName("head")[0];
+    script.src="test.js";
+    head.appendChild(script);
+    script.onload = function(){
+        test();
+    }
+</script>
+</body>
+</html>
