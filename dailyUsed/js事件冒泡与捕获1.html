@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js事件冒泡与捕获</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .class1{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li class="class1">
+        item 1
+        <span>1</span>
+    </li>
+    <li>item 2</li>
+    <li class="class1">
+        item 3
+        <span>3</span>
+    </li>
+    <li>item 4</li>
+    <li class="class1">
+        item 5
+        <span>5</span>
+    </li>
+    <li>item 6</li>
+</ul>
+<script>
+    var list = document.querySelector("#list");
+    var liDom = document.createElement("li");
+    liDom.innerText = "item 7";
+    list.appendChild(liDom);
+
+//    list.addEventListener("click",function(e){
+//        var event = e || window.event;
+//        var target = event.target || event.srcElement; //兼容IE
+//        console.log(event);
+//        //为类名为class1的子元素添加事件
+//        if(target.nodeName.toLowerCase() === "li" && target.className === "class1"){
+//            alert(target.innerText);
+//        }
+//    },false)
+
+    //使用Element.matches精确匹配
+    /*
+    * 用法：Element.target(selectorString),selectorString为CSS那样的选择器规则，
+    * 如本例子中可以使用 target.matches("li.class1"),返回一个布尔值。
+    * 若target元素为标签li并且它的类是class1，则返回true，否则返回false。
+    */
+    Element.prototype.matches = null;
+    if (!Element.prototype.matches) {
+        Element.prototype.matches =
+            Element.prototype.matchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.oMatchesSelector ||
+//            Element.prototype.webkitMatchesSelector ||
+            function(s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+                console.log(i);
+                while (--i >= 0 && matches.item(i) !== this) {}
+                return i > -1;
+            };
+    }
+    list.addEventListener("click",function(e){
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if(target.matches("li.class1")){
+            console.log("the content is: "+target.innerHTML);
+        }
+    })
+</script>
+</body>
+</html>

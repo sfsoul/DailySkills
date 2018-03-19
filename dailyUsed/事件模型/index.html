@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件模型</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">Click me!</div>
+<script>
+    var box = document.getElementById("box");
+    var event = new Event("look",{
+        'bubbles':true,
+        'cancelable':false
+    });
+    console.log(event);
+    document.dispatchEvent(event);
+    box.addEventListener("click",test,false);
+    function test(){
+        console.log("test");
+    }
+</script>
+</body>
+</html>

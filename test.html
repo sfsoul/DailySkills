@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        ul li{
+            margin:10px;
+            background: yellow;
+            border:1px solid #ccc;
+            width: 50px;
+            height:50px;
+            text-align: center;
+            line-height:50px;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script>
+    var list = document.getElementById("list");
+    var liDom = list.getElementsByTagName("li"),
+        liDomArr = Array.prototype.slice.apply(liDom);
+    liDomArr.forEach(function(item,idx){
+        item.setAttribute("data-index",idx);
+    })
+    list.addEventListener("click",function(e){
+        if(e.target.tagName === "LI"){
+//            var idx = e.target.dataset.index;
+            var idx = getIndex(e.target);
+            alert(idx+"==="+e.target.innerText)
+        }
+    },false)
+
+    function getIndex(ele){
+        var len = liDomArr.length-1;
+        while(ele = ele.nextElementSibling){
+            len -= 1;
+        };
+        console.log(len);
+        return len;
+    }
+</script>
+</body>
+</html>
