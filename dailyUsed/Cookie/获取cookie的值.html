@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取cookie的值</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script src="../../lib/tool.js"></script>
+<script>
+    console.log(document.cookie);
+    var cookieVal = tool.getCookie("ts_uid");
+    console.log(cookieVal);
+
+    var obj = {
+        name:"zj",
+        obj1:{
+            name:"dmy",
+            age:23
+        },
+        arr:[1,23,4,5]
+    }
+
+    var newO = tool.deepCopy(obj);
+    console.log(newO)
+</script>
+</body>
+</html>

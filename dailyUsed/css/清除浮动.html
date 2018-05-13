@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>清除浮动</title>
+    <style>
+        /*
+            在非IE浏览器下，当容器的高度为auto或者没设置的时候，且容器的内容中有浮动（float为left或right）的元素，
+            在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）
+            布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。
+        */
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            background: yellow;
+            width:500px;
+            margin:0 auto;
+        }
+        .box p{
+            float: left;
+            width:100px;
+            height:50px;
+            background-color: pink;
+        }
+        /*添加一个:after伪元素实现元素末尾添加一个看不见的块元素*/
+        .clearfix:after{
+            content: "";
+            display: block;
+            visibility: hidden;
+            height:0;
+            clear: both;
+        }
+        .clearfix{
+            zoom: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="box clearfix">
+    <p>hjidas</p>
+    <p>dasjkdjas</p>
+</div>
+</body>
+</html>

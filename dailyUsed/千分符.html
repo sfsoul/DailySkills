@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>千分符</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let str1 = '2123456789';
+    let str2 = '2123456789.12';
+
+    //利用正向预查 匹配开头一个数字\d 后面匹配这个数字后面必须是三个数字为一组为结尾或小数为结尾
+    function thousandth(str){
+        let reg = /\d(?=(?:\d{3})+(?:\.\d+|$))/g;
+        return str.replace(reg, (...rest) => rest[0] + ',');
+    }
+
+    console.log(thousandth(str1)); //2,123,456,789
+    console.log(thousandth(str2)); //2,123,456,789.12
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+    <child my-message="测试啊啊啊"></child>
+    <input type="text" v-model="example" style="display: block;">
+    <!--<child-component :justtest="example"></child-component>-->
+    <child-component :count="fatherCount"></child-component>
+</div>
+
+<script src="../lib/vue.js"></script>
+<script>
+        //1.确保在初始化根实例之前注册组件
+        //2.data必须是函数
+        Vue.component("my-component",{
+            template :"<h1>{{message}}</h1>",
+            data(){
+                return{
+                    message:"hello"
+                }
+            }
+        })
+
+        Vue.component("child",{
+            props:['myMessage'],
+            template:"<span>{{myMessage}}</span>"
+        })
+
+        Vue.component("child-component",{
+            //要指定验证规则，需要用对象的形式来定义prop，而不能用字符串数组：
+            props:{
+                justtest:String,
+                count:Number
+            },
+            template:"<p>{{count}}</p>"
+        })
+
+        window.vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"Hello",
+                example:"我在测试啊",
+                fatherCount:100
+            }
+        })
+</script>
+</body>
+</html>

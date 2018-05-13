@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css动画</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:150px;
+            height:150px;
+            margin: 50px auto;
+            text-align: center;
+            line-height: 150px;
+            background: pink;
+        }
+        #box:hover{
+            transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+            -moz-transition: all 1s ease-in-out;
+            -o-transition: all 1s ease-in-out;
+
+            transform: translateX(300px);
+            -ms-transform: translateX(300px);
+            -moz-transform: translateX(300px);
+            -webkit-transform: translateX(300px);
+            -o-transform: translateX(300px);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">css动画</div>
+    <script>
+        function getCookie(name){
+            if(!name) return "";
+            var cookie = document.cookie ? document.cookie : "";
+            var val;
+            if(cookie){
+                var arr = cookie.split("; ");
+                arr.forEach(function(item,idx){
+                    var newArr = item.split("=");
+                    if(name == newArr[0]){
+                        val = newArr[1];
+                    }
+                })
+                return val;
+            }
+        }
+    </script>
+</body>
+</html>

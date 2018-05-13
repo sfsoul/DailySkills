@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #ulList{
+            width:400px;
+            height:400px;
+            overflow: hidden;
+            margin:40px auto;
+        }
+        #ulList li{
+            width:100px;
+            height:30px;
+            text-align: center;
+            line-height:30px;
+            background: pink;
+            color: #000;
+            margin:20px 10px;
+        }
+    </style>
+</head>
+<body>
+<ul id="ulList">
+    <li class="li-dom">1</li>
+    <li class="li-dom">2</li>
+    <li class="li-dom">3</li>
+    <li class="li-dom">4</li>
+    <li class="li-dom">5</li>
+    <li class="li-dom">6</li>
+</ul>
+<script>
+var ulDom = document.getElementById("ulList");
+var lia = document.getElementsByClassName("li-dom")[0];
+var liDom = document.createElement("li");
+liDom.innerText = "100";
+ulDom.appendChild(liDom);
+ulDom.addEventListener("click",function(e){
+//    console.log(e);
+//    var e = e || window.event;
+//    var target = e.target || e.srcElement;
+//    if(target.tagName === "LI"){
+//        alert(target.innerHTML);
+//    }
+    console.log("ulDom 冒泡");
+},false);
+lia.addEventListener("click",function(e){
+    console.log("lia 捕获");
+},true);
+lia.addEventListener("click",function(e){
+    console.log("lia 冒泡");
+},false);
+ulDom.addEventListener("click",function(e){
+    console.log("ulDom 捕获");
+},true);
+</script>
+</body>
+</html>

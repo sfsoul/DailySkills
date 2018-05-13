@@ -3,16 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>测试</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
 </head>
 <body>
+<ul id="list"></ul>
 <script>
-    var script = document.createElement("script");
-    var head = document.getElementsByTagName("head")[0];
-    script.src="test.js";
-    head.appendChild(script);
-    script.onload = function(){
-        test();
+//    (function(){
+//        var listDom = document.getElementById("list");
+//        if(!listDom){
+//            return;
+//        }
+//        var fragmentDom = document.createDocumentFragment(); //文档碎片
+//
+//        for(var i=0;i<3;i++){
+//            var liDom = document.createElement("li");
+//            liDom.innerText = i+1;
+//            fragmentDom.appendChild(liDom);
+//        }
+//        listDom.appendChild(fragmentDom);
+//        listDom.addEventListener("click",function(e){
+//            var event = e || window.event;
+//            var target = e.target || e.srcElement;
+//            if(target.tagName === "LI"){
+//                alert(target.innerHTML);
+//            }
+//        },false);
+//    })()
+
+    /*
+    *   若要向ul中插入3000个<li>标签，该如何优化呢？ 从减少DOM操作次数、缩短循环时间两个方面减少主线程阻塞的时间。
+    *   1、requestAnimationFrame
+    *   2、DocumentFragment -- 减少DOM操作次数
+    */
+(() =>{
+    var listDom = document.getElementById("list");
+    if(!listDom){
+        return;
     }
+
+    var insertCount = 100;
+    var num = 5; //每批插入的节点次数
+    var insertNum = 0; //已经完成的批处理个数
+
+
+    function appendItems(){
+        var fragment = document.createDocumentFragment();
+        for(var i=0;i<num;i++){
+            var liDom = document.createElement("li");
+            liDom.innerText = (insertNum*num) + i + 1;
+            fragment.appendChild(liDom);
+        }
+
+        //每次批处理只修改1次DOM
+        listDom.appendChild(fragment);
+
+        insertNum += 1;
+        appendDom();
+    }
+
+    function appendDom(){
+        if(insertNum < insertCount/num){
+            window.requestAnimationFrame(appendItems);
+        }
+
+    }
+    appendDom();
+    function addEventListen(ele,eventType,callback){
+        ele.addEventListener(eventType,callback,false);
+    };
+    addEventListen(listDom,"click",function(e){
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if(target.tagName === "LI"){
+            alert(target.innerHTML);
+        }
+    })
+})()
+
 </script>
 </body>
 </html>

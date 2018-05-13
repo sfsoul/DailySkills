@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义事件</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>{{total}}</p>
+    <button-counter @increment="incrementTotal"></button-counter>
+    <button-counter @increment="incrementTotal"></button-counter>
+</div>
+
+<div id="message-event-example">
+    <p v-for="msg in messages">{{msg}}</p>
+    <button-message @message="handleMessage"></button-message>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+        Vue.component("button-message",{
+            template:`<div>
+                <input type="text" v-model="message">
+                <button @click="handleSendMessage" v-show="someChildProperty">Send</button>
+                <p @click="show">Click Me</p>
+            </div>`,
+            data:function(){
+                return {
+                    message:"test message",
+                    someChildProperty:false
+                }
+            },
+            methods:{
+                handleSendMessage:function(){
+                    this.$emit("message",{message:this.message})
+                },
+                show:function(){
+                    this.someChildProperty = true;
+                }
+            }
+        })
+
+        window.vm1 = new Vue({
+            el:"#message-event-example",
+            data:{
+                messages:[]
+            },
+            methods:{
+                handleMessage:function(payload){
+                    console.log(payload);
+                    this.messages.push(payload.message);
+                }
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+        Vue.component("button-counter",{
+            template:"<button @click='incrementCounter'>{{counter}}</button>",
+            data:function(){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                incrementCounter:function(){
+                    this.counter += 1;
+                    this.$emit("increment");
+                }
+            }
+        })
+
+        window.vm = new Vue({
+            el:"#app",
+            data:{
+                total:0
+            },
+            methods:{
+                incrementTotal:function(){
+                    this.total += 1;
+                }
+            }
+        })
+</script>
+</body>
+</html>

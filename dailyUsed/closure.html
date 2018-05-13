@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var arr = [];
+    for(var i=0;i<3;i++){
+        arr[i] = function(){
+            console.log(i);
+        };
+    }
+    //请求全局变量i
+    arr[0](); //3
+    arr[1](); //3
+    arr[2](); //3
+
+    //闭包
+    for(var i=0;i<3;i++){
+        arr[i] = (function(i){
+            return function(){
+                console.log(i);
+            }
+        })(i);
+    }
+
+    arr[0](); //0
+    arr[1](); //1
+    arr[2](); //2
+</script>
+</body>
+</html>

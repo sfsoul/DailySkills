@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建长度为100的数组，并且每个元素的值等于它的下标</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    //法一 递归写法
+    function createArray(len,arr=[]) {
+        if(len > 0){
+            arr[--len] = len;
+            createArray(len,arr);
+        }
+        return arr;
+    }
+
+    //写法二
+    Array(100).fill().map((_,i)=>i+1);
+
+    //写法三
+    [...Array(100).keys()];
+</script>
+</body>
+</html>
